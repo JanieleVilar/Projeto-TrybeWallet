@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import { fetchAction } from '../actions';
+import AddExpenses from './AddExpenses';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -12,7 +13,10 @@ class Wallet extends React.Component {
 
   render() {
     return (
-      <Header />
+      <>
+        <Header />
+        <AddExpenses />
+      </>
     );
   }
 }
