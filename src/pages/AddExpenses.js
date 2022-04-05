@@ -1,10 +1,58 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchActionExp } from '../actions';
 
 class AddExpenses extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Cartão de crédito',
+      tag: 'Lazer',
+      id: 0,
+    };
+  }
+
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleClick = () => {
+    const { atualExpenses } = this.props;
+    const {
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      id,
+    } = this.state;
+    atualExpenses(
+      {
+        id,
+        value,
+        description,
+        currency,
+        method,
+        tag,
+      },
+    );
+    this.setState({
+      id: id + 1,
+      value: '',
+      description: '',
+    });
+  }
+
   render() {
-    const { optCurrency } = this.props;
+    const { value, description } = this.state;
+    const { optCurrencies } = this.props;
     return (
       <form>
         <label htmlFor="input-value">
@@ -12,7 +60,9 @@ class AddExpenses extends React.Component {
           <input
             id="input-value"
             data-testid="value-input"
-            name="inputValue"
+            name="value"
+            value={ value }
+            onChange={ this.handleChange }
           />
         </label>
         <label htmlFor="input-description">
@@ -20,7 +70,9 @@ class AddExpenses extends React.Component {
           <input
             id="input-description"
             data-testid="description-input"
-            name="inputDescription"
+            name="description"
+            value={ description }
+            onChange={ this.handleChange }
           />
         </label>
         <label htmlFor="input-currency">
@@ -28,14 +80,15 @@ class AddExpenses extends React.Component {
           <select
             data-testid="currency-input"
             id="input-currency"
-            name="inputCurrency"
+            name="currency"
+            onChange={ this.handleChange }
           >
-            {optCurrency.map((currency) => (
+            {optCurrencies.map((currencies) => (
               <option
-                value={ currency }
-                key={ currency }
+                value={ currencies }
+                key={ currencies }
               >
-                {currency}
+                {currencies}
               </option>
             ))}
           </select>
@@ -45,15 +98,23 @@ class AddExpenses extends React.Component {
           <select
             id="input-method"
             data-testid="method-input"
+            name="method"
+            onChange={ this.handleChange }
           >
-            <option value="cartão de débito">
-              Cartão de débito
+            <option
+              value="Cartão de crédito"
+            >
+              Cartão de crédito
             </option>
-            <option value="dinheiro">
+            <option
+              value="Dinheiro"
+            >
               Dinheiro
             </option>
-            <option value="cartão de crédito">
-              Cartão de crédito
+            <option
+              value="Cartão de débito"
+            >
+              Cartão de débito
             </option>
           </select>
         </label>
@@ -62,35 +123,61 @@ class AddExpenses extends React.Component {
           <select
             id="input-tag"
             data-testid="tag-input"
+            name="tag"
+            onChange={ this.handleChange }
           >
-            <option value="alimentação">
-              Alimentação
-            </option>
-            <option value="lazer">
+            <option
+              value="Lazer"
+            >
               Lazer
             </option>
-            <option value="trabalho">
+            <option
+              value="Alimentação"
+            >
+              Alimentação
+            </option>
+            <option
+              value="Trabalho"
+            >
               Trabalho
             </option>
-            <option value="transporte">
+            <option
+              value="Transporte"
+            >
               Transporte
             </option>
-            <option value="saúde">
+            <option
+              value="Saúde"
+            >
               Saúde
             </option>
           </select>
         </label>
+        <button
+          type="button"
+          onClick={ this.handleClick }
+        >
+          Adicionar despesas
+        </button>
       </form>
     );
   }
 }
 
+AddExpenses.defaultProps = {
+  totalSoma: 0,
+};
+
 const mapStateToProps = (state) => ({
-  optCurrency: state.wallet.currencies,
+  optCurrencies: state.wallet.currencies,
 });
 
-export default connect(mapStateToProps)(AddExpenses);
+const mapDispatchToProps = (dispatch) => ({
+  atualExpenses: (expenses) => dispatch(fetchActionExp(expenses)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddExpenses);
 
 AddExpenses.propTypes = {
-  optCurrency: PropTypes.array,
+  optCurrencies: PropTypes.array,
 }.isRequired;
