@@ -11,7 +11,9 @@ class Header extends React.Component {
           {`Email: ${emailUser}`}
         </h4>
         <h4 data-testid="total-field">
-          {totalExpenses.toFixed(2)}
+          {
+            totalExpenses ? totalExpenses.toFixed(2) : 0
+          }
         </h4>
         <h4 data-testid="header-currency-field">
           BRL
