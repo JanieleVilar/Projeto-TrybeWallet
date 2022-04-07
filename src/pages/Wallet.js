@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Header from './Header';
+import Header from '../components/Header';
 import { fetchAction } from '../actions';
-import AddExpenses from './AddExpenses';
+import AddExpenses from '../components/AddExpenses';
+import ExpensesTable from '../components/expensesTable';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -16,6 +17,7 @@ class Wallet extends React.Component {
       <>
         <Header />
         <AddExpenses />
+        <ExpensesTable />
       </>
     );
   }
