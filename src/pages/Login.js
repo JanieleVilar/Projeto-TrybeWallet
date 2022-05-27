@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionUser } from '../actions';
+import styles from '../styles/login.module.css';
 
 class Login extends React.Component {
   constructor() {
@@ -49,31 +50,43 @@ class Login extends React.Component {
   render() {
     const { email, password, disabled } = this.state;
     return (
-      <div>
-        <input
-          type="email"
-          data-testid="email-input"
-          placeholder="Email"
-          value={ email }
-          name="email"
-          onChange={ this.handleChange }
-        />
-        <input
-          type="password"
-          data-testid="password-input"
-          placeholder="Senha"
-          value={ password }
-          name="password"
-          onChange={ this.handleChange }
-        />
-        <button
-          type="button"
-          disabled={ disabled }
-          onClick={ this.saveLogin }
-        >
-          Entrar
-        </button>
-      </div>
+      <section className={ styles.bodyLogin }>
+        <h1 className={ styles.titleLoginPage }>
+          <img
+            src="https://fontmeme.com/permalink/220408/99619ac9bb93fd88621a4f5b5ca2c4a6.png"
+            alt="fontes-de-letras-cursivas"
+            border="0"
+          />
+        </h1>
+        <div className={ styles.inputsDiv }>
+          <input
+            className={ styles.inputs }
+            type="email"
+            data-testid="email-input"
+            placeholder="Email"
+            value={ email }
+            name="email"
+            onChange={ this.handleChange }
+          />
+          <input
+            className={ styles.inputs }
+            type="password"
+            data-testid="password-input"
+            placeholder="Senha"
+            value={ password }
+            name="password"
+            onChange={ this.handleChange }
+          />
+          <button
+            className={ styles.buttonLogin }
+            type="button"
+            disabled={ disabled }
+            onClick={ this.saveLogin }
+          >
+            Entrar
+          </button>
+        </div>
+      </section>
     );
   }
 }

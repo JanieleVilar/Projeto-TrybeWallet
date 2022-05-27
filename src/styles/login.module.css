@@ -1,0 +1,80 @@
+/* stylelint-disable max-line-length */
+
+/* stylelint-disable at-rule-semicolon-space-before */
+
+/* stylelint-disable font-family-name-quotes */
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.bodyLogin {
+  background: linear-gradient(90deg, #b6ff99, #88e89e, #62d0a1, #44b79e, #339d96, #318388, #356a74, #37525c);
+  height: 90vh;
+  padding: 30px 2px;
+  position: relative;
+  width: 100vw;
+}
+
+.titleLoginPage {
+  color: #263e47;
+  font-family: 'Pacifico', cursive;
+  font-size: 50px;
+  text-align: center;
+}
+
+.inputsDiv {
+  align-items: center;
+  background-color: aliceblue;
+  border-radius: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 80px 400px;
+  padding-top: 30px;
+
+}
+
+.inputs {
+  background-color: #97d9e1;
+  border: none;
+  border-radius: 24px;
+  margin: 15px;
+  padding: 12px;
+  width: 50%;
+}
+
+.inputs:focus {
+  border: 0 none;
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
+
+.inputs:-webkit-autofill {
+  box-shadow: 0 0 0 30px #97d9e1 inset;
+}
+
+.buttonLogin {
+  background-color: #88e89e;
+  border: none;
+  border-radius: 8px;
+  color: rgb(65, 62, 62);
+  font-size: 15px;
+  margin-bottom: 35px;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.buttonLogin:disabled {
+  background-color: #318388;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  margin-bottom: 35px;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+}
+
+::placeholder {
+  color: rgb(48, 44, 44);
+}
